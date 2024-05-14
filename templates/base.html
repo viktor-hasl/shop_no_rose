@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/favicon_io/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>«НЕ:РОЗЫ»</title>
+</head>
+<main>
+    <body>
+        <header>
+            <nav>
+                <ul class="head-nav">
+                    <li><a href="{% url 'index' %}"><img src="{% static 'img/logo.svg' %}" alt="logo"></a></li>
+                    <li><select id="city" name="city">
+                        <option value="grodno">Гродно</option>
+                        <option value="mogilev">Могилев</option>
+                        <option value="minsk">Минск</option>
+                        <option value="gomel">Гомель</option>
+                        <option value="brest">Брест</option>
+                        <option value="vitebsk">Витебск</option>
+                        </select>
+                    </li>
+                    <li><a href="#dostavka">Доставка</a></li>
+                    <li><a href="#oplata">Оплата</a></li>
+                    <li><a class="order" href="#product">Заказать</a></li>
+                    <li><a class="lux" style="color: gold;" href="#lux">LUXARY</a></li>
+                    <li><a href="{% url 'cart_detail' %}">Корзина <span style="color: red;">({{ cart|length }})</span></a></li>
+
+                </ul>
+            </nav>
+            {% block header %}
+            {% endblock %}
+        </header>
+        {% block description %}
+        {% endblock %}
+
+        {% block pay %}
+        {% endblock %}
+
+        {% block catalog %}
+        {% endblock %}
+
+    <footer>
+            <img src="{% static 'img/logo.svg' %}" alt="logo">
+            <div>
+
+            <a href="">Доставка</a><br>
+            <a href="">Оплата</a><br>
+            <a href="">Корзина</a>
+            <p>Сделано с ♥ в Гродно
+                © 2024
+                «НЕ:РОЗЫ» ОГРН 1147746136713
+                ИНН 7731465565
+                ИП  Иванов И.И.</p>
+            </div>
+            <div>
+                <a href="">Вакансии</a>
+                <a href="">Отзывы</a>
+                <a href="">Instagram</a>
+            </div>
+            <div>
+                <h5>ГРАФИК РАБОТЫ</h5>
+                <p>Контакт-центр — с 08:00 до 22:00 без выходных. Оформление заявок на сайте и их исполнение происходит круглосуточно.</p>
+                <h5>КОНТАКТЫ</h5>
+                <p>350000, город Гродно, улица Пушкина д.30
+                    Номер контактного центра +375 33 111-22-33</p>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

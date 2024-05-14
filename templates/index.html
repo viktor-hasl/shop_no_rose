@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+            <h1>Идеальный подарок на каждый день</h1>
+            <p class="p-head">«НЕ:РОЗЫ» — Современный дизайн, аромат и красота цветов из шелкового мыла. Подойдут абсолютно для любого интерьера</p>
+            <a class="head-button" href="#product">Выбрать готовый букет</a>
+{% endblock %}
+
+{% block description %}
+<section class="description">
+            <h2>Из чего состоит букет?</h2>
+            <div>
+                <img src="{% static 'img/descr-photo.png' %}" alt="картинка описание">
+                <ul>
+                    <li>
+                        <h3>Не банальные розы</h3>
+                        <p>На ваш выбор мы соберем букет из 13, 21 или 51 розы из шелкового мыла, пропитанные цветочным экстрактом</p>
+                    </li>
+                    <li>
+                        <h3>Крафт-бокс</h3>
+                        <p>Эксклюзивные боксы разработанные по нашим стандартам. На Ваш выбор десятки разнообразныхцветовых решений</p>
+                    </li>
+                    <li>
+                        <h3>Брэндирование</h3>
+                        <p>Золотое тиснение логотипа — как украшение
+                            завершенной композиции</p>
+                    </li>
+                </ul>
+            </div>
+</section>
+{% endblock %}
+
+{% block pay %}
+<section id="dostavka">
+            <h2>Доставка и оплата</h2>
+            <div class="payment">
+                <img src="{% static 'img/card.png' %}" alt="карта">
+                <ul>
+                    <li>
+                        <h4>Доставка по Гродно:</h4>
+                        <p>Самовывоз — Бесплатно<br>
+                            +7р — доставка по городу<br>
+                            +3р — доставка к назначенному времени (±10мин)<br>
+                            +3р — за срочность (в течение часа после заказа)<br>
+                            +7р — за пределами города (до 10км)</p><br>
+                    </li>
+                    <li>
+                        <h4>Доставка по Беларуси и СНГ:</h4>
+                        <p>Доставка в другие Города или в
+                            СНГ осуществляется крупнейшими маркетплэйсами России. Заказ
+                            необходимо оформить в нашем магазине на маркетплэйсах Wildberries, Яндекс.Маркет или OZON</p>
+                    </li>
+                    <li>
+                        <h4 id="oplata" >Оплата при доставке по Гродно:</h4>
+                        <p>Оплата букетов и доставки осуществляется курьеру после получения.
+                            В случае, если получатель отличается от заказчика, оплату необходимо
+                        произвести  заранее в полном объеме на карту Сбер. Реквезиты для оплаты вышлет оператор после оформления заказа</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+{% endblock %}
+
+{% block catalog %}
+<section id='product' class="products">
+            <h2>Какой букет нам собрать для Вас?</h2>
+            <hr>
+            <div class="block-list-cord rev">
+                <ul>
+                    {% for product in products %}
+                    {% if product.ruler.name_ruler == "elegance" %}
+                    <li><form action="{% url 'cart_add' product.id %}" method="post">
+                        {% csrf_token %}
+                        <img  src="{{ product.img.url }}" alt="карточка" style="cursor:pointer; cursor:hand" onclick="submit()">
+                        <p class="price">{{ product.price }} p</p>
+                        <p class="product-name" >{{ product.title_product }}</p>
+                            </form>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <img class="labael-list" src="{% static 'img/elegance.png' %}" alt="elegance">
+            </div>
+            <hr>
+            <div class="block-list-cord">
+                <img class="labael-list" src="{% static 'img/colorist.png' %}" alt="COLORIST">
+                <ul>
+                   {% for product in products %}
+                    {% if product.ruler.name_ruler == "colorist" %}
+                    <li><form action="{% url 'cart_add' product.id %}" method="post">
+                        {% csrf_token %}
+                        <img  src="{{ product.img.url }}" alt="карточка" style="cursor:pointer; cursor:hand" onclick="submit()">
+                        <p class="price">{{ product.price }} p</p>
+                        <p class="product-name" >{{ product.title_product }}</p>
+                            </form>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <hr>
+
+            <div class="block-list-cord rev">
+
+                <ul>
+                    {% for product in products %}
+                    {% if product.ruler.name_ruler == "natural" %}
+                    <li><form action="{% url 'cart_add' product.id %}" method="post">
+                        {% csrf_token %}
+                        <img  src="{{ product.img.url }}" alt="карточка" style="cursor:pointer; cursor:hand" onclick="submit()">
+                        <p class="price">{{ product.price }} p</p>
+                        <p class="product-name" >{{ product.title_product }}</p>
+                            </form>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                <img class="labael-list" src="{% static 'img/natural.png' %}" alt="NATURAL">
+
+
+            </div>
+            <hr>
+            <div class="block-list-cord">
+                <img id="lux" class="labael-list" src="{% static 'img/luxary.png' %}" alt="LUXARY">
+                <ul>
+                     {% for product in products %}
+                    {% if product.ruler.name_ruler == "lux" %}
+                    <li><form action="{% url 'cart_add' product.id %}" method="post">
+                        {% csrf_token %}
+                        <img  src="{{ product.img.url }}" alt="карточка" style="cursor:pointer; cursor:hand" onclick="submit()">
+                        <p class="price">{{ product.price }} p</p>
+                        <p class="product-name" >{{ product.title_product }}</p>
+                            </form>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+{% endblock %}
+

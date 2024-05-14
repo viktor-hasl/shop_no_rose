@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block header %}
+
+<h2>Заполните данные для оформления заказа</h2>
+    <form class="order-form" method="post" action="{% url 'order_request' %}">
+        {% csrf_token %}
+        <p class="p-head">Имя и фамилия:<br /> <input class="inp" name="name" /></p>
+        <p class="p-head" >Телефон:<br /> <input class="inp"  name="phone" type="tel" /></p>
+        <p class="p-head" >Ваш адрес:<br /> <input class="inp"  name="address" type="text" /></p>
+        <p class="p-head" >email:<br /> <input class="inp"  name="email" type="email" /></p>
+        <a class="head-button" href="{% url 'index' %}">Вернуться на страницу</a>
+        <input class="head-button" type="submit" value="Отправить" >
+
+    </form>
+{% endblock %}

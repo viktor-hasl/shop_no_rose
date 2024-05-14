@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block header %}
+{% if no %}
+<h1>Данные не отправились</h1>
+{% else %}
+<h1>Заказ оформлен</h1>
+{% endif %}
+<a class="head-button" href="{% url 'index' %}">Вернуться на страницу</a>
+{% endblock %}
