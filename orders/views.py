@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.conf import settings
 from decimal import Decimal
 from .models import Order
+from catalog.models import Product
 import requests
 from .tg_bot import urls_request
 # Create your views here.
 
 def order_render(request):
-    req = requests.get(urls_request)
+    # pr = Product.objects.get(id=1)
     return render(request, 'order/order.html')
 
 
@@ -24,13 +25,14 @@ def order_request(request):
     if name and phone and address and email and cart:
         for key in cart.keys():
             price += Decimal(cart[key]['price']) * Decimal(cart[key]['quantity'])
-            id_product += f'id: {key}({cart[key]["quantity"]}шт.) '
+            name_product = Product.objects.get(pk=int(key)).title_product
+            id_product += f'id: {key} - {name_product} ({cart[key]["quantity"]}шт.) '
 
 
         order = Order(name_order=name, phone=phone, address=address, email=email, status_id=1, id_products=id_product, price_all_products=price)
         order.save()
         del request.session[settings.CART_SESSION_ID]
-        txt_tg = f'{name} оставил заявку, его номер {phone}.'
+        txt_tg = f'На имя {name} оставлена заявка, номер {phone}.В заказе {id_product}'
         req = requests.get(urls_request + txt_tg)
 
     else:
